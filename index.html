@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restly - API Inspector & Visualizer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <header class="main-header">
+      <div class="logo-area">
+        <span class="logo-icon">⚡</span>
+        <h1>Restly</h1>
+      </div>
+      <p>Inspect live CRUD endpoints, check response time metrics, and visualize payload objects instantly.</p>
+    </header>
+
+    <div class="presets-container" style="margin-bottom: 20px; display: flex; gap: 10px; align-items: center;">
+      <span style="font-size: 0.9rem; color: #94a3b8;">Quick Test Presets:</span>
+      <button class="preset-btn" data-url="https://jsonplaceholder.typicode.com/users" data-method="GET" style="background-color: #334155; padding: 6px 12px; font-size: 0.85rem;">👥 Get Users</button>
+      <button class="preset-btn" data-url="https://fakestoreapi.com/products/1" data-method="GET" style="background-color: #334155; padding: 6px 12px; font-size: 0.85rem;">🛍️ Get Product Object</button>
+    </div>
+
+    <section class="panel config-panel">
+      <div class="input-group">
+        <select id="http-method">
+          <option value="GET">GET</option>
+          <option value="POST">POST</option>
+          <option value="PUT">PUT</option>
+          <option value="PATCH">PATCH</option>
+          <option value="DELETE">DELETE</option>
+        </select>
+        <input type="text" id="api-url" placeholder="Paste your API URL here..." value="https://jsonplaceholder.typicode.com/users">
+        <button id="send-btn">Send Request</button>
+      </div>
+
+      <div class="input-group" style="margin-bottom: 15px;">
+        <input type="text" id="api-header-key" placeholder="Optional Header Key (e.g., Authorization)" style="font-size: 0.85rem; padding: 8px;">
+        <input type="text" id="api-header-val" placeholder="Optional Header Value (e.g., Bearer token_123)" style="font-size: 0.85rem; padding: 8px;">
+      </div>
+
+      <div id="request-body-container" style="display: none; margin-bottom: 15px;">
+        <label for="request-body" style="display: block; margin-bottom: 5px; font-size: 0.9rem; color: #94a3b8;">Request Body (JSON format):</label>
+        <textarea id="request-body" rows="5" style="width: 100%; max-width: 100%; box-sizing: border-box; background-color: #0f172a; border: 1px solid #475569; color: #fff; border-radius: 6px; padding: 10px; font-family: monospace; font-size: 0.9rem;" placeholder='{\n  "name": "John Doe",\n  "username": "johndoe"\n}'></textarea>
+      </div>
+    </section>
+
+    <div class="workspace-grid">
+      <section class="panel metrics-panel">
+        <h2>Performance Metrics</h2>
+        <div class="metric-row">
+          <span>Status Code:</span>
+          <span id="status-badge" class="badge badge-idle">Idle</span>
+        </div>
+        <div class="metric-row">
+          <span>Response Time:</span>
+          <span id="time-badge">--</span>
+        </div>
+      </section>
+
+      <section class="panel visualizer-panel">
+        <h2>Interactive JSON Tree Visualizer</h2>
+        <div id="tree-container" class="tree-container">
+          <p class="placeholder-text">Send a request or click a test preset to visualize data fields...</p>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
